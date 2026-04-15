@@ -11,10 +11,10 @@ export class FileSystemDataSource implements LogDataSource {
     private readonly mediumLogsPath = 'logs/logs-medium.log';
     private readonly highLogsPath = 'logs/logs-high.log';
     constructor() {
-
+        this.createLogsFiles();
     }
 
-    private createLogFilePath =()=> {
+    private createLogsFiles  =()=> {
         if (!fs.existsSync(this.logPath)) {
             fs.mkdirSync(this.logPath);
         }
