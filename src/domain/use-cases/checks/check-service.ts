@@ -25,14 +25,22 @@ export class CheckService implements CheckServiceInterface {
         const  req = await fetch(url);
         if (!req.ok) {throw new Error(`HTTP error! status: ${req.status}`); 
         }
-        const log = new LogEntity(` Server ${url} is up and running`, LogSeverityLevel.low);
+        const log = new LogEntity({
+            message:` Server ${url} is up and running`, 
+            level:LogSeverityLevel.low,
+            origin: 'check-service.ts'
+        });
         this.logRepository.saveLogs(log);
         this.successCallback && this.successCallback();
         return true;
         } catch (error) {
 
             const errorMessage = `${error}`;
-            const log = new LogEntity(` Server ${url} is down. Error: ${errorMessage}`, LogSeverityLevel.low);
+            const log = new LogEntity({
+                message:` Server ${url} is up and running`, 
+                level:LogSeverityLevel.low,
+                origin: 'check-service.ts'
+            });
             this.logRepository.saveLogs(log);
 
 
