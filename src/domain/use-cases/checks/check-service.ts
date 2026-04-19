@@ -6,8 +6,8 @@ interface CheckServiceInterface {
 }
 
 
-type SuccessCallback = () => void;
-type ErrorCallback = (error: String) => void;
+type SuccessCallback = () => void  | undefined;
+type ErrorCallback = (error: String) => void | undefined;
 
 
 export class CheckService implements CheckServiceInterface {
@@ -25,18 +25,26 @@ export class CheckService implements CheckServiceInterface {
         const  req = await fetch(url);
         if (!req.ok) {throw new Error(`HTTP error! status: ${req.status}`); 
         }
-        const log = new LogEntity(` Server ${url} is up and running`, LogSeverityLevel.low);
+        const log = new LogEntity({
+            message:` Server ${url} is up and running`, 
+            level:LogSeverityLevel.low,
+            origin: 'check-service.ts'
+        });
         this.logRepository.saveLogs(log);
-        this.successCallback();
+        this.successCallback && this.successCallback();
         return true;
         } catch (error) {
 
             const errorMessage = `${error}`;
-            const log = new LogEntity(` Server ${url} is down. Error: ${errorMessage}`, LogSeverityLevel.low);
+            const log = new LogEntity({
+                message:` Server ${url} is up and running`, 
+                level:LogSeverityLevel.low,
+                origin: 'check-service.ts'
+            });
             this.logRepository.saveLogs(log);
 
 
-            this.errorCallback(errorMessage );
+             this.errorCallback && this.errorCallback(errorMessage );
             return false;
         }
         
