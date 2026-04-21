@@ -1,4 +1,3 @@
-import { log } from "console";
 import { LogDataSource } from "../../domain/dataSources/log.datasource";
 import { LogEntity, LogSeverityLevel } from "../../domain/entities/log.entity";
 import fs from 'fs';
@@ -7,7 +6,7 @@ import fs from 'fs';
 export class FileSystemDataSource implements LogDataSource {
 
     private readonly logPath = 'logs/';
-    private readonly allLogsPath = 'logs/logs-all.log';
+    private readonly allLogsPath = 'logs/logs-low.log';
     private readonly mediumLogsPath = 'logs/logs-medium.log';
     private readonly highLogsPath = 'logs/logs-high.log';
     constructor() {
@@ -34,7 +33,6 @@ export class FileSystemDataSource implements LogDataSource {
 
     }
 
-    
     async saveLogs(newLog: LogEntity): Promise<void> {
         const logAsJson = `${JSON.stringify(newLog)}\n`;
 
@@ -68,6 +66,7 @@ export class FileSystemDataSource implements LogDataSource {
 
         }
     }
+
 
 
 
