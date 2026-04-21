@@ -1,5 +1,6 @@
 import { envs } from "../config/plugins/envs.plugin";
 import { CheckService } from "../domain/use-cases/checks/check-service";
+import { SendEmailLogs } from "../domain/use-cases/email/send-logs";
 import { FileSystemDataSource } from "../infrastructure/datasources/file-system.datasources";
 import { LogRepositoryImpl } from "../infrastructure/repository/log.repositoryImp";
 import { CronService } from "./cron-services/cron-service";
@@ -11,11 +12,17 @@ const fileSystemLogRepository =  new LogRepositoryImpl(
 );
 
 
+const emailService = new EmailService();
 export class Server {
     public static start() {
         console.log("Server is starting...");
 
-        // const emailService = new EmailService();
+
+        // new SendEmailLogs(
+        //     emailService,
+        //     fileSystemLogRepository
+        // ).execute(['matheownashe@gmail.com', 'matheownashe@gmail.com']);
+
         // emailService.SendEmailWithFileSystemLogs(
         //     ['matheownashe@gmail.com', 'matheownashe@gmail.com']
         // );
