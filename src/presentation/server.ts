@@ -15,12 +15,18 @@ export class Server {
     public static start() {
         console.log("Server is starting...");
 
-        const emailService = new EmailService();
-        emailService.sendEmail({
-            to: 'matheownashe@gmail.com',
-            subject: 'Test Email from NocApp',
-            htmlBody: '<h1>Hello from NocApp!</h1><p>This is a test email sent using Nodemailer.</p>'
-        });
+        // const emailService = new EmailService();
+        // emailService.SendEmailWithFileSystemLogs(
+        //     ['matheownashe@gmail.com', 'matheownashe@gmail.com']
+        // );
+
+
+        // const emailService = new EmailService();
+        // emailService.sendEmail({
+        //     to: 'matheownashe@gmail.com',
+        //     subject: 'Test Email from NocApp',
+        //     htmlBody: '<h1>Hello from NocApp!</h1><p>This is a test email sent using Nodemailer.</p>'
+        // });
 
 
         // console.log(envs.MAILER_USER, envs.MAILER_KEY);
