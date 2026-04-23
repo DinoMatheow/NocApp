@@ -18,10 +18,7 @@ export class Server {
         console.log("Server is starting...");
 
 
-        // new SendEmailLogs(
-        //     emailService,
-        //     fileSystemLogRepository
-        // ).execute(['matheownashe@gmail.com', 'matheownashe@gmail.com']);
+      
 
         // emailService.SendEmailWithFileSystemLogs(
         //     ['matheownashe@gmail.com', 'matheownashe@gmail.com']
