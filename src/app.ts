@@ -2,7 +2,9 @@
 
 import 'dotenv/config';
 import { Server } from "./presentation/server";
+import { MongoDatabase } from './data/mongo/init';
 import { envs } from './config/plugins/envs.plugin';
+import { LogModel } from './data/mongo';
 
 (async()=>{
 
@@ -10,8 +12,19 @@ await main();
 
 })();
 
-function main() {
-        Server.start();
+async function main() {
+
+    await MongoDatabase.connect({
+        mongoURL: envs.MONGO_URL,
+        dbName: envs.MONGO_DB_NAME,
+    });
+
+    const newLog = await LogModel.create({
+        message:'Test Mongo'
+    })
+
+
+        // Server.start();
     // console.log(envs);
 }
 
