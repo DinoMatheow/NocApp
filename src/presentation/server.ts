@@ -1,20 +1,23 @@
 import { envs } from "../config/plugins/envs.plugin";
+import { LogSeverityLevel } from "../domain/entities/log.entity";
 import { CheckService } from "../domain/use-cases/checks/check-service";
 import { SendEmailLogs } from "../domain/use-cases/email/send-logs";
 import { FileSystemDataSource } from "../infrastructure/datasources/file-system.datasources";
+import { MongoLogDataSource } from "../infrastructure/datasources/mongo-log.datasources";
 import { LogRepositoryImpl } from "../infrastructure/repository/log.repositoryImp";
 import { CronService } from "./cron-services/cron-service";
 import { EmailService } from "./email/email.service";
 
 
-const fileSystemLogRepository =  new LogRepositoryImpl(
-    new FileSystemDataSource()
+const LogRepository =  new LogRepositoryImpl(
+    new FileSystemDataSource(),
+    // new MongoLogDataSource(),
 );
 
 
 const emailService = new EmailService();
 export class Server {
-    public static start() {
+    public static async start() {
         console.log("Server is starting...");
 
 
@@ -35,12 +38,12 @@ export class Server {
 
         // console.log(envs.MAILER_USER, envs.MAILER_KEY);
 
-
+        // const logs = await LogRepository.getLogs(LogSeverityLevel.high);
         // CronService.createJob(
         //     '*/5 * * * * *',
         //     () => { 
         //         new CheckService(
-        //             fileSystemLogRepository,
+        //             LogRepository,
         //             () => console.log("Success callback executed."),
         //             (error) => console.log(`Error callback executed with error: ${error}`)
         //         ).execute("https://www.google.com");
