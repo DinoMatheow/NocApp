@@ -7,5 +7,6 @@ dist/
 logs/
 .env
 
-
+postgres/
 mongo/
+/src/generated/prisma
